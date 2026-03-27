@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inloggen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f5f0e8;
+      --ink: #1a1612;
+      --warm-mid: #8c7b6b;
+      --accent: #c4873c;
+      --accent-light: #e8c99a;
+      --panel: #ffffff;
+      --border: #ddd5c8;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--cream);
+    }
+
+    html {
+      height: 100%;
+    }
+
+    /* ── Left visual panel ────────────────────── */
+    .visual {
+      flex: 1;
+      position: relative;
+      background: var(--ink);
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: 3rem;
+    }
+
+    .visual-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 70% at 30% 20%, #3a2e1e 0%, transparent 70%),
+        radial-gradient(ellipse 80% 60% at 70% 80%, #2a1f12 0%, transparent 60%),
+        linear-gradient(160deg, #1a1612 0%, #2d2218 50%, #1a1612 100%);
+    }
+
+    /* Decorative geometric lines */
+    .visual-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.18;
+    }
+
+    .visual-grain {
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      opacity: 0.06;
+      mix-blend-mode: overlay;
+    }
+
+    .accent-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+    .orb-1 {
+      width: 300px; height: 300px;
+      background: var(--accent);
+      top: -80px; left: -60px;
+      opacity: 0.15;
+      animation: breathe 8s ease-in-out infinite;
+    }
+    .orb-2 {
+      width: 200px; height: 200px;
+      background: #7a5c2e;
+      bottom: 80px; right: 40px;
+      opacity: 0.2;
+      animation: breathe 11s ease-in-out infinite reverse;
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); opacity: 0.15; }
+      50% { transform: scale(1.15); opacity: 0.25; }
+    }
+
+    .visual-text {
+      position: relative;
+      z-index: 2;
+      animation: fadeUp 1s ease both;
+    }
+
+    .brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+    }
+    .brand-name em {
+      font-style: italic;
+      color: var(--accent-light);
+    }
+
+    .brand-tagline {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--warm-mid);
+    }
+
+    /* ── Right login panel ────────────────────── */
+    .login-panel {
+      width: min(480px, 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(2rem, 6vw, 5rem);
+      background: var(--panel);
+      position: relative;
+      z-index: 1;
+      box-shadow: -20px 0 80px rgba(26,22,18,0.12);
+      animation: slideIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(40px); opacity: 0; }
+      to   { transform: translateX(0);    opacity: 1; }
+    }
+
+    @keyframes fadeUp {
+      from { transform: translateY(24px); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+
+    .login-header { margin-bottom: 2.8rem; animation: fadeUp 0.9s 0.15s ease both; }
+
+    .login-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+
+    .login-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.1;
+    }
+    .login-title em { font-style: italic; }
+
+    .login-subtitle {
+      margin-top: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--warm-mid);
+      font-weight: 300;
+    }
+
+    /* ── Form ─────────────────────────────────── */
+    .form { display: flex; flex-direction: column; gap: 1.4rem; animation: fadeUp 0.9s 0.25s ease both; }
+
+    .field { display: flex; flex-direction: column; gap: 0.45rem; }
+
+    label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    input {
+      width: 100%;
+      padding: 0.85rem 1.1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      background: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--ink);
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+      outline: none;
+    }
+
+    input::placeholder { color: #c0b5a8; }
+
+    input:focus {
+      border-color: var(--accent);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(196,135,60,0.1);
+    }
+
+    .field-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .forgot {
+      font-size: 0.78rem;
+      color: var(--warm-mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .forgot:hover { color: var(--accent); }
+
+    /* ── Checkbox ─────────────────────────────── */
+    .check-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .check-row input[type="checkbox"] {
+      width: 16px; height: 16px;
+      accent-color: var(--accent);
+      background: var(--cream);
+      padding: 0;
+      cursor: pointer;
+    }
+    .check-row label {
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      font-weight: 400;
+      color: var(--warm-mid);
+      cursor: pointer;
+    }
+
+    /* ── Submit button ────────────────────────── */
+    .btn-submit {
+      margin-top: 0.4rem;
+      width: 100%;
+      padding: 1rem;
+      background: var(--ink);
+      color: var(--cream);
+      border: none;
+      border-radius: 6px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.25s, transform 0.15s;
+    }
+
+    .btn-submit::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.5s ease;
+    }
+
+    .btn-submit:hover { background: #2d2218; transform: translateY(-1px); }
+    .btn-submit:hover::after { transform: translateX(100%); }
+    .btn-submit:active { transform: translateY(0); }
+
+    /* ── Divider ──────────────────────────────── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 0.4rem;
+    }
+    .divider span { flex: 1; height: 1px; background: var(--border); }
+    .divider p { font-size: 0.72rem; color: #b8ac9f; white-space: nowrap; }
+
+    /* ── Social buttons ───────────────────────── */
+    .social-row { display: flex; gap: 0.8rem; }
+
+    .btn-social {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      background: transparent;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--ink);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    }
+
+    .btn-social:hover {
+      border-color: var(--warm-mid);
+      background: var(--cream);
+      transform: translateY(-1px);
+    }
+
+    .btn-social svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+    /* ── Footer ───────────────────────────────── */
+    .login-footer {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: var(--warm-mid);
+      text-align: center;
+      animation: fadeUp 0.9s 0.35s ease both;
+    }
+    .login-footer a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    .login-footer a:hover { text-decoration: underline; }
+
+    /* ── Decorative corner ────────────────────── */
+    .corner-deco {
+      position: absolute;
+      top: 2rem; right: 2rem;
+      width: 48px; height: 48px;
+      border-top: 1.5px solid var(--border);
+      border-right: 1.5px solid var(--border);
+      opacity: 0.6;
+    }
+
+    /* ── Responsive ───────────────────────────── */
+    @media (max-width: 700px) {
+      body { flex-direction: column; overflow: auto; }
+      .visual { display: none; }
+      .login-panel { width: 100%; min-height: 100vh; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Left visual -->
+  <div class="visual">
+    <div class="visual-bg"></div>
+    <div class="visual-grain"></div>
+    <div class="accent-orb orb-1"></div>
+    <div class="accent-orb orb-2"></div>
+
+    <!-- Decorative SVG lines -->
+    <svg class="visual-svg" viewBox="0 0 600 800" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="300" cy="400" r="280" stroke="#c4873c" stroke-width="0.6"/>
+      <circle cx="300" cy="400" r="220" stroke="#c4873c" stroke-width="0.4"/>
+      <circle cx="300" cy="400" r="160" stroke="#c4873c" stroke-width="0.3"/>
+      <line x1="0" y1="400" x2="600" y2="400" stroke="#c4873c" stroke-width="0.4"/>
+      <line x1="300" y1="0" x2="300" y2="800" stroke="#c4873c" stroke-width="0.4"/>
+      <line x1="0" y1="0" x2="600" y2="800" stroke="#c4873c" stroke-width="0.3"/>
+      <line x1="600" y1="0" x2="0" y2="800" stroke="#c4873c" stroke-width="0.3"/>
+    </svg>
+
+    <div class="visual-text">
+      <div class="brand-name">Welkom<br/><em>terug.</em></div>
+      <p class="brand-tagline">Uw persoonlijke omgeving</p>
+    </div>
+  </div>
+
+  <!-- Right login panel -->
+  <div class="login-panel">
+    <div class="corner-deco"></div>
+
+    <div class="login-header">
+      <p class="login-eyebrow">Inloggen</p>
+      <h1 class="login-title">Ga verder<br/><em>waar u gebleven was.</em></h1>
+      <p class="login-subtitle">Vul uw gegevens in om toegang te krijgen.</p>
+    </div>
+
+    <form class="form" onsubmit="return false;">
+      <div class="field">
+        <label for="email">E-mailadres</label>
+        <input type="email" id="email" placeholder="naam@bedrijf.be" autocomplete="email"/>
+      </div>
+
+      <div class="field">
+        <div class="field-row">
+          <label for="password">Wachtwoord</label>
+          <a href="#" class="forgot">Vergeten?</a>
+        </div>
+        <input type="password" id="password" placeholder="••••••••" autocomplete="current-password"/>
+      </div>
+
+      <div class="check-row">
+        <input type="checkbox" id="remember"/>
+        <label for="remember">Onthoud mij op dit apparaat</label>
+      </div>
+
+      <button type="submit" class="btn-submit">Inloggen</button>
+
+      <div class="divider">
+        <span></span>
+        <p>of ga verder met</p>
+        <span></span>
+      </div>
+
+      <div class="social-row">
+        <!-- Google -->
+        <button type="button" class="btn-social">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          Google
+        </button>
+
+        <!-- Microsoft -->
+        <button type="button" class="btn-social">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11.4 2H2v9.4h9.4V2z" fill="#F25022"/>
+            <path d="M22 2h-9.4v9.4H22V2z" fill="#7FBA00"/>
+            <path d="M11.4 12.6H2V22h9.4v-9.4z" fill="#00A4EF"/>
+            <path d="M22 12.6h-9.4V22H22v-9.4z" fill="#FFB900"/>
+          </svg>
+          Microsoft
+        </button>
+      </div>
+    </form>
+
+    <p class="login-footer">
+      Nog geen account? <a href="#">Registreer hier</a>
+    </p>
+  </div>
+
+</body>
+</html>
