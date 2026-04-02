@@ -1,29 +1,191 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8">
-  <title>Team League - Teams</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ploegenapp — Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="home.css"/>
 </head>
 <body>
 
-<header>
-  <h1>Competitie</h1>
-  <nav>
-    <a href="index.html"><button>Teams</button></a>
-    <a href="matches.html"><button>Wedstrijden</button></a>
-    <a href="standings.html"><button>Klassement</button></a>
-  </nav>
-</header>
+  <!-- ══════════════════ TOPBAR ══════════════════ -->
+  <header class="topbar">
+    <a href="home.html" class="topbar-logo">
+      <div class="topbar-logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          <path d="M2 12h20"/>
+        </svg>
+      </div>
+      <span class="topbar-logo-name">Ploegen<em>app</em></span>
+    </a>
 
-<main>
-  <section>
-    <h2>Teams</h2>
-    <div id="teams-container">
-      <!-- Wordt later door backend gevuld -->
+    <div class="topbar-divider"></div>
+
+    <nav class="topbar-nav">
+      <a href="home.html" class="nav-link active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        Home
+      </a>
+      <a href="teams.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        Ploegen
+      </a>
+      <a href="matches.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        Wedstrijden
+      </a>
+      <!-- NIEUWE TAB: kopieer een <a> blok, pas href + icoon + label aan, zet class="nav-link active" op de actieve pagina -->
+    </nav>
+
+    <div class="topbar-right">
+      <a href="login.html" class="topbar-login-btn">Inloggen</a>
+      <div class="topbar-avatar" title="Profiel">BP</div>
+    </div>
+  </header>
+
+  <!-- ══════════════════ HERO ══════════════════ -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grain"></div>
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+
+    <svg class="hero-svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="600" cy="300" r="480" stroke="#c4873c" stroke-width="0.5"/>
+      <circle cx="600" cy="300" r="360" stroke="#c4873c" stroke-width="0.4"/>
+      <circle cx="600" cy="300" r="240" stroke="#c4873c" stroke-width="0.3"/>
+      <line x1="0" y1="300" x2="1200" y2="300" stroke="#c4873c" stroke-width="0.4"/>
+      <line x1="600" y1="0"   x2="600"  y2="600" stroke="#c4873c" stroke-width="0.4"/>
+      <line x1="0"   y1="0"   x2="1200" y2="600" stroke="#c4873c" stroke-width="0.3"/>
+      <line x1="1200" y1="0"  x2="0"    y2="600" stroke="#c4873c" stroke-width="0.3"/>
+    </svg>
+
+    <div class="hero-content">
+      <h1 class="hero-title">Uw ploegen,<br/><em>uw platform.</em></h1>
+      <p class="hero-sub">Volg ploegen, bekijk wedstrijden en blijf op de hoogte van elk resultaat.</p>
+      <div class="hero-actions">
+        <a href="teams.html" class="btn-hero-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          Bekijk ploegen
+        </a>
+        <a href="#" class="btn-hero-secondary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          Wedstrijden
+        </a>
+      </div>
+    </div>
+
+    <!-- Floating football visual -->
+    <div class="hero-visual">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="football-svg">
+        <circle cx="100" cy="100" r="88" fill="#1e1a15" stroke="rgba(196,135,60,0.3)" stroke-width="1.5"/>
+        <!-- Pentagon patches -->
+        <polygon points="100,28 114,55 100,62 86,55" fill="rgba(255,255,255,0.08)" stroke="rgba(196,135,60,0.5)" stroke-width="0.8"/>
+        <polygon points="152,68 162,90 145,100 128,88 132,66" fill="rgba(255,255,255,0.08)" stroke="rgba(196,135,60,0.5)" stroke-width="0.8"/>
+        <polygon points="140,148 120,160 100,152 100,132 120,124" fill="rgba(255,255,255,0.08)" stroke="rgba(196,135,60,0.5)" stroke-width="0.8"/>
+        <polygon points="60,148 80,124 100,132 100,152 80,160" fill="rgba(255,255,255,0.08)" stroke="rgba(196,135,60,0.5)" stroke-width="0.8"/>
+        <polygon points="48,68 68,66 72,88 55,100 38,90" fill="rgba(255,255,255,0.08)" stroke="rgba(196,135,60,0.5)" stroke-width="0.8"/>
+        <circle cx="100" cy="100" r="88" fill="none" stroke="rgba(196,135,60,0.15)" stroke-width="1"/>
+      </svg>
     </div>
   </section>
-</main>
-<script src="app.js"></script>
+
+  
+  <!-- ══════════════════ QUICK LINKS ══════════════════ -->
+  <section class="quick-section">
+    <div class="quick-header">
+      <p class="section-eyebrow">Navigeer snel naar</p>
+      <h2 class="section-title">Wat wilt u <em>bekijken?</em></h2>
+    </div>
+
+    <div class="quick-grid">
+
+      <a href="teams.html" class="quick-card quick-card--dark">
+        <div class="quick-card-bg"></div>
+        <div class="quick-card-orb"></div>
+        <div class="quick-card-content">
+          <div class="quick-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <h3 class="quick-card-title">Ploegen</h3>
+          <p class="quick-card-sub">Bekijk alle geregistreerde voetbalploegen, hun spelers en details.</p>
+          <span class="quick-card-cta">
+            Bekijk ploegen
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="9 18 15 12 9 6"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <a href="#" class="quick-card quick-card--light">
+        <div class="quick-card-content">
+          <div class="quick-card-icon quick-card-icon--dark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+          </div>
+          <h3 class="quick-card-title quick-card-title--dark">Wedstrijden</h3>
+          <p class="quick-card-sub quick-card-sub--dark">Alle fixtures, live scores en uitslagen op één plek.</p>
+          <span class="quick-card-cta quick-card-cta--dark">
+            Bekijk wedstrijden
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="9 18 15 12 9 6"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- NIEUWE QUICK CARD TOEVOEGEN: kopieer een .quick-card blok -->
+
+    </div>
+  </section>
+
+  <!-- ══════════════════ FOOTER ══════════════════ -->
+  <footer class="site-footer">
+    <div class="footer-logo">
+      <div class="topbar-logo-icon" style="width:24px;height:24px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="12" height="12">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          <path d="M2 12h20"/>
+        </svg>
+      </div>
+      <span>Voetbal<em>app</em></span>
+    </div>
+    <p class="footer-copy">© 2025 Voetbalapp. Alle rechten voorbehouden.</p>
+  </footer>
+
 </body>
 </html>

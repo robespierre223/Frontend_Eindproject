@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Teamdetail</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+  <!-- Left visual panel -->
+  <div class="visual">
+    <div class="visual-bg"></div>
+    <div class="visual-grain"></div>
+    <div class="accent-orb orb-1"></div>
+    <div class="accent-orb orb-2"></div>
+
+    <svg class="visual-svg" viewBox="0 0 600 800" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="300" cy="400" r="280" stroke="#c4873c" stroke-width="0.6"/>
+      <circle cx="300" cy="400" r="220" stroke="#c4873c" stroke-width="0.4"/>
+      <circle cx="300" cy="400" r="160" stroke="#c4873c" stroke-width="0.3"/>
+      <line x1="0" y1="400" x2="600" y2="400" stroke="#c4873c" stroke-width="0.4"/>
+      <line x1="300" y1="0" x2="300" y2="800" stroke="#c4873c" stroke-width="0.4"/>
+      <line x1="0" y1="0" x2="600" y2="800" stroke="#c4873c" stroke-width="0.3"/>
+      <line x1="600" y1="0" x2="0" y2="800" stroke="#c4873c" stroke-width="0.3"/>
+    </svg>
+
+    <div class="visual-shirt">
+      <div class="shirt-display" id="visual-shirt">
+        <!-- filled by JS -->
+      </div>
+      <div>
+        <div class="brand-name" id="visual-name"></div>
+        <p class="brand-tagline">Voetbalploeg</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right content panel -->
+  <div class="content-panel">
+    <div class="corner-deco"></div>
+
+    <!-- Loading state -->
+    <div id="loading" class="loading-overlay">
+      <div class="spinner"></div>
+      <p class="loading-text">Team laden…</p>
+    </div>
+
+    <!-- Main content (hidden until loaded) -->
+    <div id="main-content" style="display:none;">
+
+      <a href="teams.html" class="back-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        Alle ploegen
+      </a>
+
+      <div class="page-header">
+        <p class="page-eyebrow" id="team-eyebrow">Team</p>
+        <h1 class="page-title" id="team-title"></h1>
+      </div>
+
+      <!-- Info cards -->
+      <div class="info-row">
+        <div class="info-card">
+          <div class="info-card-label">Divisie</div>
+          <div class="info-card-value" id="info-division">—</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">Regio</div>
+          <div class="info-card-value" id="info-region">—</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">Spelers</div>
+          <div class="info-card-value" id="info-players">0</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">Wedstrijden</div>
+          <div class="info-card-value" id="info-matches">0</div>
+        </div>
+      </div>
+
+      <!-- Players section -->
+      <div class="section">
+        <div class="section-header">
+          <span class="section-title">Spelerslijst</span>
+          <span class="section-count" id="players-count"></span>
+        </div>
+        <div class="player-list" id="player-list"></div>
+      </div>
+
+      <!-- Matches section -->
+      <div class="section">
+        <div class="section-header">
+          <span class="section-title">Wedstrijden</span>
+          <span class="section-count" id="matches-count"></span>
+        </div>
+        <div class="match-list" id="match-list"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
