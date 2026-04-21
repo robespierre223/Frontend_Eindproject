@@ -1,26 +1,117 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8">
-  <title>Team League - Wedstrijden</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wedstrijden</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="home.css"/>
+  <link rel="stylesheet" href="matches.css"/>
 </head>
 <body>
 
-<header>
-  <h1>Matches test</h1>
-  <nav>
-    
-  </nav>
-</header>
+  <!-- ══════════════════ TOPBAR ══════════════════ -->
+  <header class="topbar">
+    <a href="index.html" class="topbar-logo">
+      <div class="topbar-logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          <path d="M2 12h20"/>
+        </svg>
+      </div>
+      <span class="topbar-logo-name">Ploegen<em>app</em></span>
+    </a>
 
-<main>  
-  <section>
-    <div id="match-container" >
-      <!-- Wordt later door backend gevuld -->
+    <div class="topbar-divider"></div>
+
+    <nav class="topbar-nav">
+      <a href="index.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        Home
+      </a>
+      <a href="teams.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        Ploegen
+      </a>
+      <a href="matches.html" class="nav-link active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        Wedstrijden
+      </a>
+      <!-- NIEUWE TAB: kopieer een <a> blok, pas href + icoon + label aan -->
+    </nav>
+
+    <div class="topbar-right">
+      <a href="login.html" class="topbar-login-btn">Inloggen</a>
+      <div class="topbar-avatar" title="Profiel">BP</div>
     </div>
-  </section>
-</main>
-<script src="matches.js"></script>
+  </header>
+
+  <!-- ══════════════════ PAGE ══════════════════ -->
+  <div class="page-wrapper">
+    <div class="page-body">
+
+      <!-- Left deco panel -->
+      <div class="deco-panel">
+        <div class="deco-bg"></div>
+        <div class="deco-grain"></div>
+        <div class="deco-orb deco-orb-1"></div>
+        <div class="deco-orb deco-orb-2"></div>
+
+        <svg class="deco-svg" viewBox="0 0 400 700" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="200" cy="350" r="240" stroke="#c4873c" stroke-width="0.6"/>
+          <circle cx="200" cy="350" r="180" stroke="#c4873c" stroke-width="0.4"/>
+          <circle cx="200" cy="350" r="120" stroke="#c4873c" stroke-width="0.3"/>
+          <line x1="0"   y1="350" x2="400" y2="350" stroke="#c4873c" stroke-width="0.4"/>
+          <line x1="200" y1="0"   x2="200" y2="700" stroke="#c4873c" stroke-width="0.4"/>
+          <line x1="0"   y1="0"   x2="400" y2="700" stroke="#c4873c" stroke-width="0.3"/>
+          <line x1="400" y1="0"   x2="0"   y2="700" stroke="#c4873c" stroke-width="0.3"/>
+        </svg>
+
+        <div class="deco-text">
+          <p class="deco-eyebrow">Kalender</p>
+          <div class="deco-title">De<br/><em>wedstrijden.</em></div>
+          <p class="deco-subtitle">Alle fixtures & uitslagen</p>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <main class="content-panel">
+        <div class="corner-deco"></div>
+
+        <div class="page-header">
+          <p class="page-eyebrow">Overzicht</p>
+          <h1 class="page-title">Alle <em>wedstrijden</em></h1>
+          <p class="page-subtitle">Bekijk geplande wedstrijden, live scores en uitslagen.</p>
+        </div>
+
+        
+        <!-- Match cards injected here by JS -->
+        <div class="match-list" id="match-container"></div>
+
+        <!-- Empty state -->
+        <div class="state-box state-empty" id="match-empty" style="display:none;">
+          <p>Geen wedstrijden gevonden<em>.</em></p>
+          <span>Probeer een andere zoekterm of filter</span>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="matches.js"></script>
 </body>
 </html>
